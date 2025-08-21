@@ -25,6 +25,7 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 처음 게시판 들어가면 무조건 1 페이지 내용이 출력 되어야 함 따라서 1로 초기값 해줘야 함
 		int page = 1;
+		
 		// 총 글의 개수
 		int totalrecords = boardDao.countBoard();
 		// 총 글의 개수로 표현 될 전체 페이지의 수(예를 들면 총 37개 글이면 4페이지가 전달 되어야 함)
@@ -42,8 +43,18 @@ public class BoardController extends HttpServlet {
 		List<BoardDto> boardDtos = boardDao.boardList(page);
 		request.setAttribute("boardDtos", boardDtos); // 클라이언트가 선택한 페이지에 해당하는 글들 (현재 10개씩)
 		
+		// 페이징 **************************************************
 		request.setAttribute("currentPage", page); // 클라이언트가 현재 선택한 페이지 번호
-		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("totalPages", totalPages); // 상수개씩(현재 10개씩) 계산된 전체 페이지 수
+		
+		int startPage = (((page - 1) / BoardDao.PAGE_GROUP_SIZE) * BoardDao.PAGE_GROUP_SIZE) + 1;
+		int endPage = startPage + BoardDao.PAGE_GROUP_SIZE - 1;
+		// 계산한 endPage 값 (startPage + 9) 이 실제 마지막 페이지 값보다 작으면 마지막 페이지 값으로 endPage 값을 대체
+		if (endPage > totalPages) {
+			endPage = totalPages;
+		}
+		request.setAttribute("startPage", startPage); // 하단 페이지 넘버 중 시작 페이지?
+		request.setAttribute("endPage", endPage); // 하단 페이지 넘버 중 마지막 페이지?
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("boardList.jsp");
 		dispatcher.forward(request, response);
