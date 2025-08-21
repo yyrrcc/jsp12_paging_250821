@@ -19,16 +19,16 @@ public class BoardDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	// 1페이지당 보여지는 글의 개수 PAGE_SIZE
-	public static final int RECORD_PER_PAGE = 20;
+	// 1페이지당 보여지는 글의 개수
+	public static final int RECORD_PER_PAGE = 10;
 	// 게시판 하단에 표시될 현재 글의 개수로 만들어진 전체 페이지 수 [1][2][3][4][5][6][7][8][9][10]
 	public static final int PAGE_GROUP_SIZE = 10;
 	
-	
-	
+
 	
 	// 페이징 해서 게시글 가져오는 메서드. 매개변수로 page를 받아야 함.
 	public List<BoardDto> boardList(int page) {
+		// limit은 숫자만큼만 데이터 가져오는 것, offset은 숫자만큼 글 밀어낸 후 다음 글 가져오
 		int offset = (page - 1) * RECORD_PER_PAGE;
 		String sql = "SELECT * FROM boardmvc ORDER BY bnum DESC LIMIT ? OFFSET ?";
 		List<BoardDto> boardDtos = new ArrayList<>();

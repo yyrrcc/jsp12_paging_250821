@@ -41,18 +41,19 @@
             </table>
             
         	<hr>
-        	<!-- 1페이지로 이동 화살표 〈〉《》-->
+        	<!-- 첫 페이지(1페이지)로 이동 화살표 〈〉《》-->
         	<c:if test="${currentPage > 1 }">
         		<a href="boardlist?page=1" class="movebutton">《 </a>
         	</c:if>
-     	    <!-- 페이지 그룹 이동 화살표 〈〉《》-->
+     	    <!-- 페이지 그룹 이동 화살표 (이전 페이지 블록의 마지막 페이지 불러오기) -->
         	<c:if test="${startPage > 1 }">
         		<a href="boardlist?page=${startPage - 1 }" class="movebutton">〈 </a>
         	</c:if>
         	
-        	<!-- 1부터 페이지수만큼 돌리기. foreach문 안에 ifelse문 -->
+        	<!-- begin부터 end까지 수만큼 페이지 돌리기. foreach문 안에 ifelse문(choose,when,otherwise) -->
         	<c:forEach begin="${startPage }" end="${endPage }" var="i">
         		<c:choose>
+        			<!-- i가 현재 페이지라면 그 페이지에 css 넣어주거나 링크 클릭 못하게 하거 -->
         			<c:when test="${i == currentPage }">
         				<a href="boardlist?page=${i }" class="buttoncurrent">${i }페이지</a>
         			</c:when>
@@ -62,11 +63,11 @@
         		</c:choose>
         	</c:forEach>
         	
-        	<!-- 페이지 그룹 이동 화살표 〈〉《》-->
+        	<!-- 페이지 그룹 이동 화살표 (다음 페이지 블록에서 보이는 첫번째 페이지 불러오기) -->
         	<c:if test="${endPage < totalPages }">
         		<a href="boardlist?page=${endPage + 1 }" class="movebutton"> 〉</a>
         	</c:if>
-        	<!-- 마지막 페이지로 이동 화살표 〈〉《》-->
+        	<!-- 마지막 페이지로 이동 화살표-->
         	<c:if test="${currentPage < totalPages}">
         		<a href="boardlist?page=${totalPages }" class="movebutton"> 》</a>
         	</c:if>

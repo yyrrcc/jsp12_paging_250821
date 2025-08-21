@@ -12,8 +12,7 @@ import jsp12_paging_250821.dto.BoardDto;
 import java.io.IOException;
 import java.util.List;
 
-// boardlist 요청만 구현
-@WebServlet("/boardlist") 
+@WebServlet("/boardlist") // boardlist 요청만 구현
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     BoardDao boardDao = new BoardDao();
@@ -28,8 +27,7 @@ public class BoardController extends HttpServlet {
 		
 		// 총 글의 개수
 		int totalrecords = boardDao.countBoard();
-		// 총 글의 개수로 표현 될 전체 페이지의 수(예를 들면 총 37개 글이면 4페이지가 전달 되어야 함)
-		// 총 글 개수 나누기 상수 71/10 -> 7.1 -> 올림 8
+		// 총 글의 개수로 표현 될 전체 페이지의 수(예를 들면 총 37개 글이면 4페이지가 전달 되어야 함 - 올)
 		int totalPages = (int) Math.ceil((double) totalrecords / BoardDao.RECORD_PER_PAGE);
 		
 		// 클라이언트가 누른 하단 페이지 넘버 가져오기
@@ -53,8 +51,8 @@ public class BoardController extends HttpServlet {
 		if (endPage > totalPages) {
 			endPage = totalPages;
 		}
-		request.setAttribute("startPage", startPage); // 하단 페이지 넘버 중 시작 페이지?
-		request.setAttribute("endPage", endPage); // 하단 페이지 넘버 중 마지막 페이지?
+		request.setAttribute("startPage", startPage); // 하단 페이지 그룹 페이지 중에서 첫번째로 위치한 페이지
+		request.setAttribute("endPage", endPage); // 하단 페이지 그룹 페이지 중에서 마지막에 위치한 페이지
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("boardList.jsp");
 		dispatcher.forward(request, response);
