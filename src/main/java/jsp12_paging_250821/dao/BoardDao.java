@@ -20,9 +20,9 @@ public class BoardDao {
 	ResultSet rs = null;
 	
 	// 1페이지당 보여지는 글의 개수 PAGE_SIZE
-	public static final int RECORD_PER_PAGE = 10;
+	public static final int RECORD_PER_PAGE = 20;
 	// 게시판 하단에 표시될 현재 글의 개수로 만들어진 전체 페이지 수 [1][2][3][4][5][6][7][8][9][10]
-	public static final int PAGE_GROUP_SIZE = 6;
+	public static final int PAGE_GROUP_SIZE = 10;
 	
 	
 	
@@ -139,7 +139,7 @@ public class BoardDao {
 				}
 
 				} catch (Exception e) {
-					System.out.println("DB 에러 발생, 페이징 실패");
+					System.out.println("DB 에러 발생, 모든 글 개수 반환 실패");
 					e.printStackTrace();
 				} finally { 
 					try {
