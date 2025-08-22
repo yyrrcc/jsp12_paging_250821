@@ -19,7 +19,7 @@ public class BoardDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	// 1페이지당 보여지는 글의 개수
+	// 1페이지당 보여지는 글의 개수(sql의 LIMIT 과 동일한 값이 된다)
 	public static final int RECORD_PER_PAGE = 10;
 	// 게시판 하단에 표시될 현재 글의 개수로 만들어진 전체 페이지 수 [1][2][3][4][5][6][7][8][9][10]
 	public static final int PAGE_GROUP_SIZE = 10;

@@ -48,6 +48,7 @@ public class BoardController extends HttpServlet {
 		int startPage = (((page - 1) / BoardDao.PAGE_GROUP_SIZE) * BoardDao.PAGE_GROUP_SIZE) + 1;
 		int endPage = startPage + BoardDao.PAGE_GROUP_SIZE - 1;
 		// 계산한 endPage 값 (startPage + 9) 이 실제 마지막 페이지 값보다 작으면 마지막 페이지 값으로 endPage 값을 대체
+		// 마지막 페이지 그룹의 경우에는 실제 마지막 페이지로 표시
 		if (endPage > totalPages) {
 			endPage = totalPages;
 		}

@@ -53,7 +53,8 @@
         	<!-- begin부터 end까지 수만큼 페이지 돌리기. foreach문 안에 ifelse문(choose,when,otherwise) -->
         	<c:forEach begin="${startPage }" end="${endPage }" var="i">
         		<c:choose>
-        			<!-- i가 현재 페이지라면 그 페이지에 css 넣어주거나 링크 클릭 못하게 하거 -->
+        		
+        			<%-- i가 현재 페이지라면 그 페이지에 css 넣어주거나 링크 클릭 못하게 하거나 --%>
         			<c:when test="${i == currentPage }">
         				<a href="boardlist?page=${i }" class="buttoncurrent">${i }페이지</a>
         			</c:when>
